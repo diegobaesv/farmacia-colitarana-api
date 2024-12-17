@@ -1,10 +1,13 @@
 import { Request, Response } from 'express';
 import * as proveedorService from '../services/proveedor.service';
+import { Proveedor } from '../entities/proveedor';
 
 export const insertarProveedor = async (req: Request, res: Response) => {
-    const proveedor = req.body;
-    const response = proveedorService.insertarProveedor(proveedor);
-    res.json(response);
+    console.log('insertarProveedor')
+    console.log('req.body',req.body)
+    const proveedor: Partial<Proveedor> = req.body;
+    const newProveedor: Proveedor = await proveedorService.insertarProveedor(proveedor)
+    res.json(newProveedor);
 }
 
 export const listarProveedor = async (req: Request, res: Response) => {
