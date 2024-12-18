@@ -1,16 +1,16 @@
 import { AppDataSource } from "../config/db.config";
 import { Proveedor } from "../entities/proveedor";
+import { EstadoAuditoria } from "../enums/estado-auditoria";
 
 const repository = AppDataSource.getRepository(Proveedor);
 
 export const insertarProveedor = async (data: Partial<Proveedor>): Promise<Proveedor> => {
-    console.log('insertarProveedor::service',data)
     const newProveedor: Proveedor = await repository.save(data);
     return await repository.findOne({where: { idProveedor: newProveedor.idProveedor }});
 }
 
-export const listarProveedor = () => {
-    return {accion:'listarProveedor'};
+export const listarProveedor = async (): Promise<Proveedor[]> => {
+    return await repository.find({where: { estadoAuditoria: EstadoAuditoria.ACTIVO }});
 }
 
 export const obtenerProveedor = (idProveedor: number) => {

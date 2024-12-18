@@ -5,19 +5,25 @@ import { BaseResponse } from '../shared/base-response';
 
 export const insertarProveedor = async (req: Request, res: Response) => {
     try {
-        console.log('insertarProveedor')
-        console.log('req.body',req.body)
+        console.log('insertarProveedor');
         const proveedor: Partial<Proveedor> = req.body;
         const newProveedor: Proveedor = await proveedorService.insertarProveedor(proveedor)
         res.json(BaseResponse.success(newProveedor));
     } catch (error) {
+        console.error(error);
         res.status(500).json(BaseResponse.error(error.message));
     }
 }
 
 export const listarProveedor = async (req: Request, res: Response) => {
-    const response = proveedorService.listarProveedor();
-    res.json(response);
+    try {
+        console.log('listarProveedor');
+        const proveedores: Proveedor[] = await proveedorService.listarProveedor();
+        res.json(BaseResponse.success(proveedores));
+    } catch (error) {
+        console.error(error);
+        res.status(500).json(BaseResponse.error(error.message));
+    }
 }
 
 export const obtenerProveedor = async (req: Request, res: Response) => {
