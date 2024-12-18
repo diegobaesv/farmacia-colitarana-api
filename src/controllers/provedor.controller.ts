@@ -27,9 +27,14 @@ export const listarProveedor = async (req: Request, res: Response) => {
 }
 
 export const obtenerProveedor = async (req: Request, res: Response) => {
-    const { idProveedor } = req.params;
-    const response = proveedorService.obtenerProveedor(Number(idProveedor));
-    res.json(response);
+    try {
+        const { idProveedor } = req.params;
+        const proveedor: Proveedor = await proveedorService.obtenerProveedor(Number(idProveedor));
+        res.json(BaseResponse.success(proveedor));
+    } catch (error) {
+        console.error(error);
+        res.status(500).json(BaseResponse.error(error.message));
+    }
 }
 
 export const actualizarProveedor = async (req: Request, res: Response) => {

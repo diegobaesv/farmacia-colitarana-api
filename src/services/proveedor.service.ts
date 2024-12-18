@@ -13,8 +13,8 @@ export const listarProveedor = async (): Promise<Proveedor[]> => {
     return await repository.find({where: { estadoAuditoria: EstadoAuditoria.ACTIVO }});
 }
 
-export const obtenerProveedor = (idProveedor: number) => {
-    return {accion:`obtenerProveedor:${idProveedor}`};
+export const obtenerProveedor = async (idProveedor: number): Promise<Proveedor> => {
+    return await repository.findOne({where: { idProveedor, estadoAuditoria: EstadoAuditoria.ACTIVO }});
 }
 
 export const actualizarProveedor = (idProveedor: number, data: any) => {
