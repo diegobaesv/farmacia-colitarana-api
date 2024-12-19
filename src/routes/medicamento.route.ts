@@ -5,8 +5,8 @@ const router: Router = Router();
 
 router.post('/',insertarMedicamento);
 router.get('/',listarMedicamentos);
-router.get('/:idProveedor',obtenerMedicamento);
-router.put('/:idProveedor',actualizarMedicamento);
-router.delete('/:idProveedor',darBajaMedicamento);
+router.get('/:idMedicamento',obtenerMedicamento);
+router.put('/:idMedicamento',actualizarMedicamento);
+router.delete('/:idMedicamento',darBajaMedicamento);
 
 export default router;
